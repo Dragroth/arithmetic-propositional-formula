@@ -42,7 +42,9 @@ def is_tautology(formula: str, variables: tuple):
         values = {var: (bits >> i) & 1 for i, var in enumerate(variables)}
         if not eval_formula(formula, values):
             # Found a case where the formula is not true
-            print(values)
+            for value in values:
+                if value in variables:
+                    print(f"variable: {value} value: {values[value]}")
             return False
     # The formula is true for all possible values 
     return True
@@ -51,6 +53,8 @@ if __name__ == "__main__":
     # The tested formula
     # The formula should be a string or a tuple/list of strings
     # Note that the function works recursively and it only works with 1 (variable), 2 (NOT) or 3 arguments (binary operators), for example ((p OR q) OR r) is supported but (p OR q OR r) is not
+
+
     test_formula = (
         ('p', 'IMPLIES', ('NOT', 'q')),
         'OR',
