@@ -19,6 +19,9 @@ def eval_formula(formula: str, values: dict):
     
     def IMPLIES(x, y):
         return 1 - x + x * y
+    
+    def EQUIVALENT(x, y):
+        return x * y + (1 - x) * (1 - y)
 
     # Evaluate the formula recursively
     if type(formula) == str: # Base case: variable, e.g. formula = 'p'
@@ -54,15 +57,12 @@ if __name__ == "__main__":
     # The formula should be a string or a tuple/list of strings
     # Note that the function works recursively and it only works with 1 (variable), 2 (NOT) or 3 arguments (binary operators), for example ((p OR q) OR r) is supported but (p OR q OR r) is not
 
-
     test_formula = (
-        ('p', 'IMPLIES', ('NOT', 'q')),
-        'OR',
-        ('p', 'AND', 'q')
+        ("NOT", ("p", "AND", "q")), "EQUIVALENT", (("NOT", "p"), "OR" , ("NOT", "q"))
     )
-
+    
     # Remember to always set test variables used in test formula
-    test_variables = ('p', 'q')
+    test_variables = ('p', "q")
 
     if is_tautology(test_formula, test_variables):
         print("The test formula is a tautology.")
