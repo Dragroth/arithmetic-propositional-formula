@@ -47,7 +47,7 @@ def is_tautology(formula: str, variables: tuple):
             # Found a case where the formula is not true
             for value in values:
                 if value in variables:
-                    print(f"variable: {value} value: {values[value]}")
+                    print(f"{value}: {values[value]}")
             return False
     # The formula is true for all possible values 
     return True
@@ -55,14 +55,19 @@ def is_tautology(formula: str, variables: tuple):
 if __name__ == "__main__":
     # The tested formula
     # The formula should be a string or a tuple/list of strings
-    # Note that the function works recursively and it only works with 1 (variable), 2 (NOT) or 3 arguments (binary operators), for example ((p OR q) OR r) is supported but (p OR q OR r) is not
+    # Note that the function works recursively and it only works with 1 (variable), 2 (NOT) or 3 arguments (binary operators), for example (("p", "OR", "q"), "OR", "r") is supported but ("p", "OR", "q", "OR", "r") is not
+
+
+    # Remember to always set test variables used in test formula
+    test_variables = ('p', 'q', 'r')
 
     test_formula = (
-        ("NOT", ("p", "AND", "q")), "EQUIVALENT", (("NOT", "p"), "OR" , ("NOT", "q"))
-    )
+            (("p", "implies", "q"), "and", ("r", "implies", "q")),
+            "implies",
+            ((("not","q"), "or", ("not","q")), "implies", (("not","p"), "or", ("not","r")))
+        )
     
-    # Remember to always set test variables used in test formula
-    test_variables = ('p', "q")
+    # Make sure to check examples.py for more examples
 
     if is_tautology(test_formula, test_variables):
         print("The test formula is a tautology.")
