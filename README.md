@@ -19,3 +19,5 @@ The operators should be infix, but that can be easily changed by reordering vari
 ```python
 left, op, right = formula
 ```
+
+You can check examples.py for a couple of examples how the test formula should look like.
